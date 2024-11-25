@@ -1,10 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Amplify } from "aws-amplify";
+import outputs from "../amplify_outputs.json";
+import AuthenticatorWrapper from "./AuthenticatorWrapper";
+import App from "./App";
+import "./index.css";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+Amplify.configure(outputs);
+
+const root = document.getElementById("root");
+
+ReactDOM.createRoot(root).render(
+  <React.StrictMode>
+    <AuthenticatorWrapper>
+      <App />
+    </AuthenticatorWrapper>
+  </React.StrictMode>
+);
