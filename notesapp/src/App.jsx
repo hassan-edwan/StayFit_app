@@ -1,151 +1,109 @@
-import { useState, useEffect } from "react";
-import {
-  Button,
-  Text,
-  TextField,
-  Heading,
-  Flex,
-  View,
-  Image,
-  Grid,
-  Divider,
-} from "@aws-amplify/ui-react";
-import { getUrl } from "aws-amplify/storage";
-import { uploadData } from "aws-amplify/storage";
-import { generateClient } from "aws-amplify/data";
-import outputs from "../amplify_outputs.json";
-
-const client = generateClient({ authMode: "userPool" });
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
+import "./App.css";
 
 export default function App() {
-  const [notes, setNotes] = useState([]);
+  const [gymAccess, setGymAccess] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchNotes();
-  }, []);
+  const navigate = useNavigate(); // Create navigate function
 
-  async function fetchNotes() {
-    const { data: notes } = await client.models.Note.list();
-    await Promise.all(
-      notes.map(async (note) => {
-        if (note.image) {
-          const linkToStorageFile = await getUrl({
-            path: ({ identityId }) => `media/${identityId}/${note.image}`,
-          });
-          note.image = linkToStorageFile.url;
-        }
-        return note;
-      })
-    );
-    setNotes(notes);
-  }
+  // Handle changes to the Gym Access state (Yes or No)
+  const handleGymAccessChange = (value) => {
+    setGymAccess(value); // Set the gymAccess state to either "Yes" or "No"
+  };
 
-  async function createNote(event) {
-    event.preventDefault();
-    const form = new FormData(event.target);
-    const { data: newNote } = await client.models.Note.create({
-      name: form.get("name"),
-      description: form.get("description"),
-      image: form.get("image").name,
-    });
+  const handleNameChange = (e) => {
+    setName(e.target.value); // Handle name input
+  };
 
-    if (newNote.image)
-      await uploadData({
-        path: ({ identityId }) => `media/${identityId}/${newNote.image}`,
-        data: form.get("image"),
-      }).result;
-
-    fetchNotes();
-    event.target.reset();
-  }
-
-  async function deleteNote({ id }) {
-    await client.models.Note.delete({ id });
-    fetchNotes();
-  }
+  // Handle form submission and data saving
+  const handleGetStartedClick = async () => {
+    if (!name || !gymAccess) {
+      alert("Please provide your name and gym access status.");
+      return;
+    }
+  
+    setLoading(true); // Show loading indicator while submitting data
+    navigate("/screen2");
+    // try {
+    //   console.log("Sending data:", { name, gymAccess }); // Debug data being sent
+  
+    //   const response = await fetch("http://localhost:3000/api/save", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ name, gymAccess }),
+    //   });
+  
+    //   const data = await response.json();
+    //   console.log("Response data:", data); // Debug server response
+  
+    //   if (response.ok) {
+    //     alert(data.message); // Show success message
+    //     navigate("/screen2"); // Navigate to the next screen
+    //   } else {
+    //     alert(`Error: ${data.message}`); // Show error message from the server
+    //   }
+    // } catch (error) {
+    //   console.error("Error saving data:", error);
+    //   alert("An error occurred. Please try again."); // Handle network errors
+    // } finally {
+    //   setLoading(false); // Reset loading state
+    // }
+  };
+  
 
   return (
-    <Flex
-      justifyContent="center"
-      alignItems="center"
-      direction="column"
-      width="70%"
-      margin="0 auto"
-    >
-      <Heading level={1}>My Notes App</Heading>
-      <View as="form" margin="3rem 0" onSubmit={createNote}>
-        <Flex
-          direction="column"
-          justifyContent="center"
-          gap="2rem"
-          padding="2rem"
-        >
-          <TextField
-            name="name"
-            placeholder="Note Name"
-            label="Note Name"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <TextField
-            name="description"
-            placeholder="Note Description"
-            label="Note Description"
-            labelHidden
-            variation="quiet"
-            required
-          />
-          <View
-            name="image"
-            as="input"
-            type="file"
-            alignSelf={"end"}
-            accept="image/png, image/jpeg"
-          />
-          <Button type="submit" variation="primary">
-            Create Note
-          </Button>
-        </Flex>
-      </View>
-      <Divider />
-      <Heading level={2}>Current Notes</Heading>
-      <Grid
-        margin="3rem 0"
-        autoFlow="column"
-        justifyContent="center"
-        gap="2rem"
-        alignContent="center"
-      >
-        {notes.map((note) => (
-          <Flex
-            key={note.id || note.name}
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-            gap="2rem"
-            border="1px solid #ccc"
-            padding="2rem"
-            borderRadius="5%"
-          >
-            <Heading level={3}>{note.name}</Heading>
-            <Text fontStyle="italic">{note.description}</Text>
-            {note.image && (
-              <Image
-                src={note.image}
-                alt={`visual aid for ${notes.name}`}
-                style={{ width: 400 }}
-              />
-            )}
-            <Button
-              variation="destructive"
-              onClick={() => deleteNote(note)}
+    <div className="container">
+      <div className="title-section">
+        <div className="header-title">
+          Let's create the best experience for you
+        </div>
+        <div className="header-text">
+          Let us know a bit more so we can help <br />
+          you
+        </div>
+
+        <label htmlFor="nameInput" className="label">
+          What should we call you?
+        </label>
+        <input
+          id="nameInput"
+          type="text"
+          value={name}
+          onChange={handleNameChange}
+          placeholder="First & Last Name"
+          className="input-field"
+        />
+
+        <div className="gym-access">
+          <div className="label">Gym Access</div>
+          <div className="button-group">
+            <div
+              onClick={() => handleGymAccessChange("Yes")}
+              className={`button ${gymAccess === "Yes" ? "active" : ""}`}
             >
-              Delete note
-            </Button>
-          </Flex>
-        ))}
-      </Grid>
-    </Flex>
+              Yes
+            </div>
+            <div
+              onClick={() => handleGymAccessChange("No")}
+              className={`button ${gymAccess === "No" ? "active" : ""}`}
+            >
+              No
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`get-started-button ${loading ? "disabled" : ""}`}
+        onClick={loading ? null : handleGetStartedClick} // Disable button while loading
+      >
+        {loading ? "Submitting..." : "Get Started"}
+      </div>
+    </div>
   );
 }

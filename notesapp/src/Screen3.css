@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;500;600&display=swap');
+
+/* General Styles */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Container Styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  /* Align items at the top of the page */
+  align-items: center;
+  padding: 20px;
+  background-color: #000;
+  color: #fff;
+  min-height: 100vh; /* Ensures the container takes up at least the full height of the viewport */
+  font-family: 'Montserrat', sans-serif;
+  max-width: 100%;
+  padding-bottom: 70px; /* Add extra space at the bottom to make room for the fixed button */
+}
+
+/* Title Section */
+.header-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.plan-card {
+    background-color: #323232;
+    border-radius: 10px;
+    padding: 8px 20px;
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+
+.label {
+  font-size: 18px;
+}
+
+/* Week Days */
+.week-days {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Very faint line to separate */
+  padding-bottom: 8px; /* Add some space below the days */
+  width: 100%; /* Make sure the line spans the entire width of the card */
+}
+
+.week-day {
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.week-day:hover {
+  background-color: #a763ff;
+}
+
+.week-day.selected {
+  border: 1px solid #a763ff;
+  color: #a763ff;
+}
+
+/* Dropdown Section */
+.dropdown-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.dropdown-label {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.dropdown {
+  padding: 12px 16px;
+  background-color: #323232;
+  border-radius: 10px;
+  border: 2px solid #323232;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  width: 100%;
+}
+
+.dropdown:hover {
+  border-color: #a763ff;
+}
+
+/* Plan Summary Section */
+.plan-summary {
+  margin-bottom: 0px;
+}
+
+.plan-summary-dropdown {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Very faint line to separate */
+    padding-bottom: 0px; /* Add space below the dropdown */
+    width: 100%; /* Make sure the line spans the entire width of the card */
+  }
+  
+  .plan-summary-dropdown:last-child {
+    border-bottom: none;
+    margin-bottom: 0px;
+  }
+
+  
+.plan-summary-dropdown .label {
+  flex: 1;
+  margin-top: 6px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.plan-summary-dropdown select {
+  flex: 0.5;
+  padding: 4px 10px;
+  background-color: #323232;
+  border-radius: 10px;
+  border: 2px solid #323232;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.plan-summary-dropdown select:hover {
+  border-color: #a763ff;
+}
+
+/* Activity Types Section */
+.activity-types {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.activity-cards {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.activity-card {
+  background-color: #323232;
+  border-radius: 10px;
+  width: 32%;
+  padding: 40px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  position: relative;
+}
+
+.activity-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.selected {
+  border: 2px solid #a763ff;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.activity-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+/* Fixed Button Styles */
+.button {
+  padding: 15px;
+  background-color: #a763ff;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 15px;
+  cursor: pointer;
+  position: fixed; /* Fixes the button to the bottom of the screen */
+  bottom: 20px; /* Position it 20px from the bottom */
+  left: 50%; /* Centers the button horizontally */
+  transform: translateX(-50%); /* Offset the button to truly center it */
+  max-width: 95%;
+}
+
+.button:hover {
+  background-color: #8a4fff;
+}
+
+.button:disabled {
+  background-color: #8a4fff;
+  cursor: not-allowed;
+}

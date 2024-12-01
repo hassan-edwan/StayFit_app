@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-stayfit-dev-9024d-authRole",
+      "UnauthRoleArn": "arn:aws:iam::850995572841:role/amplify-stayfit-dev-9024d-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::850995572841:role/amplify-stayfit-dev-9024d-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-stayfit-dev-9024d-deployment",
+      "UnauthRoleName": "amplify-stayfit-dev-9024d-unauthRole",
+      "StackName": "amplify-stayfit-dev-9024d",
+      "StackId": "arn:aws:cloudformation:us-east-1:850995572841:stack/amplify-stayfit-dev-9024d/797989b0-aadc-11ef-b04a-123342be28af",
+      "AmplifyAppId": "d27htk2h51skpn"
+    },
+    "categories": {
+      "auth": {
+        "stayfit3a4fa9fe": {}
+      },
+      "storage": {
+        "s3913f7add": {}
+      }
+    }
+  }
+}
