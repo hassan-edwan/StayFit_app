@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Screen2.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from '@fortawesome/free-solid-svg-icons'; 
+import "./Styles.css";
 
-export default function Screen2() {
+export default function HealthConcerns() {
   const [selectedConditions, setSelectedConditions] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -36,7 +38,7 @@ export default function Screen2() {
       setLoading(false);
       return;
     }
-    navigate("/screen3");
+    navigate("/BuildRoutine");
   };
 
   return (
@@ -44,9 +46,7 @@ export default function Screen2() {
       <div className="title-section">
         <div className="header-title">Any health considerations?</div>
         <div className="header-text">
-          Select any conditions you have to tailor <br />
-          your exercises for your safety and <br />
-          comfort.
+          Select any conditions you have to tailor your exercises for your safety and comfort.
         </div>
 
         <div className="conditions">
@@ -68,7 +68,7 @@ export default function Screen2() {
                   }`}
                 >
                   {selectedConditions.includes(condition) && (
-                    <div className="checkmark">✔</div>
+                      <FontAwesomeIcon icon={faCheck} className="checkmark" />
                   )}
                 </div>
                 <span className="text">{condition}</span>
@@ -83,9 +83,7 @@ export default function Screen2() {
         onClick={handleNextClick}
         disabled={loading}
       >
-        <span className="button-text">
-          {loading ? "Submitting..." : "Next"}
-        </span>
+        {loading ? "Submitting..." : "Next"}
       </button>
     </div>
   );

@@ -4,10 +4,15 @@ import { Amplify } from "aws-amplify";
 import outputs from "../amplify_outputs.json";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Import Router and Routes
 import AuthenticatorWrapper from "./AuthenticatorWrapper";
-import App from "./App";
-import Screen2 from "./Screen2"; // Import Screen2
-import Screen3 from "./Screen3"; // Import Screen3
-import Screen4 from './Screen4';
+import GymAccess from "./GymAccess";
+import HealthConcerns from "./HealthConcerns"; 
+import BuildRoutine from "./BuildRoutine"; 
+import ReviewRoutine from './ReviewRoutine';
+import LoadingScreen from './LoadingScreen';  
+import Routines from './Routines'; 
+import Progress from './Progress';  
+import Community from './Community';  
+import Profile from './Profile';   
 import "./index.css";
 
 Amplify.configure(outputs);
@@ -20,10 +25,15 @@ ReactDOM.createRoot(root).render(
       <AuthenticatorWrapper>
         <Routes>
           {/* Define your routes */}
-          <Route path="/" element={<App />} /> {/* Route for the App screen */}
-          <Route path="/screen2" element={<Screen2 />} /> {/* Route for Screen2 */}
-          <Route path="/screen3" element={<Screen3 />} /> {/* Route for Screen3 */}
-          <Route path="/screen4" element={<Screen4 />} /> {/* Route for Screen4 */}
+          <Route path="/" element={<GymAccess />} /> 
+          <Route path="/HealthConcerns" element={<HealthConcerns />} /> 
+          <Route path="/BuildRoutine" element={<BuildRoutine />} /> 
+          <Route path="/ReviewRoutine" element={<ReviewRoutine />} /> 
+          <Route path="/LoadingScreen" element={<LoadingScreen />} />
+          <Route path="/Routines" element={<Routines />} /> 
+          <Route path="/Progress" element={<Progress />} />  
+          <Route path="/Community" element={<Community />} />  
+          <Route path="/Profile" element={<Profile />} /> 
         </Routes>
       </AuthenticatorWrapper>
     </Router>

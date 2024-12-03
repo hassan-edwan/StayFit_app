@@ -21,7 +21,7 @@ const db = new sqlite3.Database('./database.db', (err) => {
   } else {
     console.log('Connected to SQLite database');
     db.run(
-      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, gym_access TEXT)',
+      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, gym_access TEXT, goal TEXT, experience TEXT, health_issues TEXT)',
     );
   }
 });

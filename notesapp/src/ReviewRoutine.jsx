@@ -1,25 +1,28 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
-import './Screen4.css';
+import './Styles.css';
 
-export default function Screen4() {
+export default function ReviewRoutine() {
   const navigate = useNavigate(); // Initialize the navigate function
 
   const handleBackClick = () => {
-    navigate('/screen3');  // Navigate back to Screen3
+    navigate('/BuildRoutine');  // Navigate back to Screen3
   };
 
   const handleConfirmClick = () => {
     // Add logic to confirm the plan (e.g., send data to an API or save it)
-    alert('Plan confirmed!');
+    navigate('/LoadingScreen');
   };
 
   return (
     <div className="container">
-      <div className="screen4-content">
+      <button className="back-btn" onClick={handleBackClick}>
+        &#8592; Back
+      </button>
+      <div className="content">
         <div className="header-title">Review Routine</div>
         <div className="header-text">
-          Starts Monday, December 2
+          Starts <span className="purple-date">Monday, December 2</span>
         </div>
         <div className="label">Weekly Schedule</div>
         <div className="text">
@@ -44,14 +47,12 @@ export default function Screen4() {
         </div>
 
         {/* Buttons for confirming or going back */}
-        <div className="action-buttons">
-          <button className="button confirm-btn" onClick={handleConfirmClick}>
-            Confirm Plan
+          <button 
+            className="button" 
+            onClick={handleConfirmClick}
+          >
+            Create Routine
           </button>
-          <button className="button back-btn" onClick={handleBackClick}>
-            Back
-          </button>
-        </div>
       </div>
     </div>
   );

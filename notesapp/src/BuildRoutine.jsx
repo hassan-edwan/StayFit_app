@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
-import './Screen3.css';
+import './Styles.css';
 
-export default function Screen3() {
+export default function BuildRoutine() {
   const navigate = useNavigate(); // Initialize the navigate function
 
   const [selectedActivityTypes, setSelectedActivityTypes] = useState({
@@ -54,8 +54,7 @@ export default function Screen3() {
     // Add further logic for form submission here
     setLoading(false);
 
-    // Navigate to Screen4 after clicking "Review Plan"
-    navigate('/screen4'); // Use navigate to go to Screen4
+    navigate('/ReviewRoutine'); 
   };
 
   return (
@@ -165,7 +164,7 @@ export default function Screen3() {
           onClick={handleNextClick}
           disabled={loading || !fitnessLevel || Object.values(selectedActivityTypes).every((selected) => !selected)}
         >
-          <span>{loading ? 'Submitting...' : 'Review Plan'}</span>
+          {loading ? 'Submitting...' : 'Review Routine'}
         </button>
       </div>
     </div>

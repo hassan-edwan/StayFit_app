@@ -1,4 +1,20 @@
 {
+  "api": {
+    "api3fccaf15": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "stayfit71410436"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "stayfit3a4fa9fe": {
       "customAuth": false,
@@ -29,7 +45,48 @@
       "service": "Cognito"
     }
   },
+  "function": {
+    "dynamo5f7f5bffTrigger41ba2035": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamo5f7f5bff"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "stayfit71410436": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributeEnvMap": {
+            "Arn": "TABLE_ARN",
+            "Name": "TABLE_NAME"
+          },
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "storage",
+          "resourceName": "dynamo5f7f5bff"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "storage": {
+    "dynamo5f7f5bff": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "s3913f7add": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
