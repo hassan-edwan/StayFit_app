@@ -254,7 +254,7 @@
           "breakCircularDependency": true,
           "dependsOn": "",
           "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://main.d3v2r6evut82hv.amplifyapp.com/\"],\"LogoutURLs\":[\"https://main.d3v2r6evut82hv.amplifyapp.com/\"]}",
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"765984174331-9s5j94vu8qj0450hvutniuuhf9shl1m7.apps.googleusercontent.com\",\"client_secret\":\"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\"}]",
+          "hostedUIProviderCreds": "",
           "env": "dev"
         }
       }
