@@ -19,9 +19,7 @@
       "dependsOn": [],
       "customAuth": false,
       "frontendAuthConfig": {
-        "socialProviders": [
-          "GOOGLE"
-        ],
+        "socialProviders": [],
         "usernameAttributes": [
           "EMAIL"
         ],
@@ -44,7 +42,7 @@
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-stayfit-dev-9024d-deployment/amplify-cfn-templates/auth/stayfit3a4fa9fe-cloudformation-template.json",
         "logicalId": "authstayfit3a4fa9fe"
       },
-      "lastPushTimeStamp": "2024-11-25T04:42:57.890Z",
+      "lastPushTimeStamp": "2024-12-03T21:48:11.005Z",
       "output": {
         "UserPoolId": "us-east-1_v9WMj9KdS",
         "AppClientIDWeb": "4qbumndt39ct8d8t2aajlll0vi",
