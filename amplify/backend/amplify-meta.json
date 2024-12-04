@@ -114,6 +114,11 @@
           }
         }
       ]
+    },
+    "todoFunction": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "api": {
@@ -124,6 +129,20 @@
         {
           "category": "function",
           "resourceName": "stayfit71410436",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    },
+    "todoAPI": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "todoFunction",
           "attributes": [
             "Name",
             "Arn"

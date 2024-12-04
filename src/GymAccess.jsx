@@ -37,7 +37,7 @@ export default function App() {
 
     try {
       // Replace this URL with your actual API Gateway endpoint
-      await axios.post("https://abc123xyz.execute-api.us-east-1.amazonaws.com/dev/items", payload);
+      await axios.post("https://jlg4zkc2h0.execute-api.us-east-1.amazonaws.com/production", payload);
       
       // Navigate to the next page on success
       navigate("/HealthConcerns");

@@ -1,6 +1,6 @@
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
-import seniorImage from './assets/seniorsexcersing 1.png';
+import seniorImage from './assets/seniorsexcersing.png';
 import { Amplify } from 'aws-amplify';
 import awsmobile from './aws-exports';  // Import your AWS configuration
 
@@ -24,7 +24,7 @@ export default function AuthenticatorWrapper({ children }) {
                     {user ? (
                         <div>
                             {children}
-                            <button onClick={signOut}>Sign Out</button>
+                            {/* <button onClick={signOut}>Sign Out</button> */}
                         </div>
                     ) : (
                         <p>Loading...</p>

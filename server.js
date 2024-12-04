@@ -1,64 +1,36 @@
-import express from 'express';
-import sqlite3 from 'sqlite3'; // Use sqlite3
-import cors from 'cors';
-import path from 'path';
-import { fileURLToPath } from 'url';
+const AWS = require('aws-sdk');
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-const app = express();
-const port = 3000;
+exports.handler = async (event) => {
+  const { userId, name, gymAccess } = JSON.parse(event.body);
 
-// Add this if you're using ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-app.use(cors());
-app.use(express.json());
-
-// Initialize SQLite database
-const db = new sqlite3.Database('./database.db', (err) => {
-  if (err) {
-    console.error('Error opening database:', err.message);
-  } else {
-    console.log('Connected to SQLite database');
-    db.run(
-      'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT, gym_access TEXT, goal TEXT, experience TEXT, health_issues TEXT)',
-    );
-  }
-});
-
-// API to save user data
-app.post('/api/save', (req, res) => {
-  const { name, gymAccess } = req.body;
-
-  if (!name || !gymAccess) {
-    return res.status(400).json({ message: 'Name and gym access status are required' });
+  if (!userId || !name || !gymAccess) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: "Missing required fields" }),
+    };
   }
 
-  db.run(
-    'INSERT INTO users (name, gym_access) VALUES (?, ?)',
-    [name, gymAccess],
-    (err) => {
-      if (err) {
-        console.error('Error saving data:', err.message);
-        return res.status(500).json({ message: 'Internal server error' });
-      }
-      res.json({ message: 'Data saved successfully' });
-    }
-  );
-});
+  const params = {
+    TableName: "YourDynamoDBTableName",
+    Item: {
+      userId, // Partition key
+      name,
+      gymAccess,
+    },
+  };
 
-// Route to display database content (Users table)
-app.get('/', (req, res) => {
-  db.all('SELECT * FROM users', [], (err, rows) => {
-    if (err) {
-      console.error('Error retrieving data:', err.message);
-      return res.status(500).json({ message: 'Internal server error' });
-    }
-    res.json({ users: rows }); // Send the rows of users as a JSON response
-  });
-});
-
-// Start the server
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-});
+  try {
+    await dynamoDb.put(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ message: "User data saved successfully" }),
+    };
+  } catch (err) {
+    console.error("DynamoDB error:", err);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: "Could not save user data" }),
+    };
+  }
+};

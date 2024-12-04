@@ -17,7 +17,6 @@ html, body {
   height: 100%; /* Full height of the viewport */
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 }
 
 .container {
@@ -32,9 +31,24 @@ html, body {
     flex-grow: 1;
   }
 
+  .no-padding {
+    padding: 20px 0;
+  }
 
 .justify-content-center {
     justify-content: center;
+  }
+
+  .smaller-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    padding: 20px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    background-color: #1C1C1E;
+    color: #fff;
+    flex-grow: 1;
   }
 
   .title-section {
@@ -42,6 +56,20 @@ html, body {
     max-width: 350px;
     margin: 60px 0 0px;
     text-align: left;
+  }
+
+  .review-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .review-text {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    text-align: center;
   }
 
 .header-title {
@@ -117,7 +145,8 @@ html, body {
     border-radius: 10px;
     width: 100%;
     max-width: 400px;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 50px;
   }
 
 .summary-card p {
@@ -125,7 +154,7 @@ html, body {
   font-weight: 500;
   color: #fff;
   margin-left: 25%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .summary-card .activity-text p {
@@ -136,14 +165,31 @@ html, body {
   
   .summary-card .activity {
     font-size: 16px;  
-    font-weight: 700; 
-    margin-top: 5px;
-    margin-bottom: 5px;  }
+    font-weight: 700;  
+  }
   
   .summary-card .workout-time {
     color: #8E8E93;  /* Set color to the desired shade */
     font-weight: 500; /* Regular weight for the time text */
-    margin-bottom: 5px;
+  }
+
+  .summary-card .add-card {
+    display: flex;  /* Use flexbox to align items in a row */
+    align-items: center;  /* Vertically center the items */
+    cursor: pointer;  /* Optional: Makes the button clickable */
+  }
+
+  .summary-card .add {
+    color: #8E8E93;  
+    font-size: 14px;
+    margin-top: 20px;
+    margin-left: 32px;
+  }
+
+  .summary-card .plus {
+    color: #8E8E93;  
+    margin-left: 42px;
+    font-size: 18px;  
   }
 
   .date-container {
@@ -161,10 +207,18 @@ html, body {
   }
   
   .circle {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
     width: 60px;  /* Diameter of the circle */
     height: 60px;  /* Diameter of the circle */
     background-color: #3A3A3C;  /* Circle color */
     border-radius: 50%;  /* Makes it circular */
+  }
+
+  .running { 
+    color: #a763ff; 
+    font-size: 20px;
   }
   
   .activity-text {
@@ -202,10 +256,10 @@ html, body {
   
   /* Line Under "30 min Total Body" */
   .line-under-details {
-    width: 75%;
+    width: 73%;
     border: none;
     border-top: 1px solid rgba(255, 255, 255, 0.2);  /* Faint line */
-    margin-left: 25%;  /* Remove margins */
+    margin-left: 27%;  /* Remove margins */
     padding: 0; 
   } 
 
@@ -215,62 +269,135 @@ html, body {
   margin: 20px;
 }
 
-.main-content {
-  padding: 0 20px;
-}
-
-.card-section {
-  margin-bottom: 30px;
-}
-
-.section-title {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 15px;
+/* Large Cards Section */
+.large-cards-section {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 13px; /* Adds consistent spacing between cards */
 }
 
 .card-row {
   display: flex;
-  gap: 14px;
-  overflow: auto;  
+  flex-direction: column;
+  align-items: flex-start;
 }
 
-.card-row::-webkit-scrollbar {
-  height: 8px;  /* Scrollbar height */
+.relative {
+  position: relative;
 }
 
-.card-row::-webkit-scrollbar-thumb {
-  background-color: #a763ff;  /* Purple scrollbar */
-  border-radius: 10px;
-}
-
-.card-row::-webkit-scrollbar-track {
-  background-color: transparent;  /* Hide track */
-}
-
-.card {
+.card.large-card {
+  background-color: #323232;
+  border-radius: 0 0 10px 10px;
+  width: 320px; /* Uniform width for all larger cards */
+  height: 180px; /* Uniform height for all larger cards */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
-  width: 189px;
+  padding: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-between;
+  text-align: center; /* Center text in the card */
+  align-items: center;
 }
 
-.image-placeholder {
+.large-image {
   width: 100%;
-  height: 104px;
-  background: #d9d9d9;
-  border-radius: 10px;
+  height: 220px;
+  object-fit: cover;
+  object-position: top right;
+  border-radius: 10px 10px 0 0;
 }
 
-.card-title {
-  font-size: 16px;
-  font-weight: 500;
-}
-
-.card-time {
+/* Header styling */
+.card-header0 {
   font-size: 14px;
-  font-weight: 400;
+  color: #a763ff; 
+}
+
+.white {
+  color: white;
+}
+
+.card-header {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff; /* White header text */
+}
+
+/* Button styling */
+.card-button {
+  border-radius: 15px;
+  background-color: #a763ff;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  width: 90%;
+  padding: 19px 39px; 
+  margin-top: 10px; 
+}
+
+.button-row {
+  display: flex;
+  gap: 4px; /* Adjust the space between buttons */
+  justify-content: center; /* Centers buttons horizontally */
+}
+
+.section-label {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+
+/* Smaller Cards Section */
+.small-cards-section {
+  width: 100%;
+  overflow-x: auto;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 13px; /* Adds consistent spacing between cards */
+}
+
+.card-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-image {
+  background-color: #323232;
+  border-radius: 10px;
+  width: 153px; /* Uniform width for all smaller cards */
+  height: 104px; /* Uniform height for all smaller cards */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin-bottom: 5px;
+  object-fit: cover;
+}
+
+.card-title.small-card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 5px;
+}
+
+.card-caption.small-card-caption {
+  font-size: 12px;
+  color: #ccc;
+}
+
+.large-cards-section::-webkit-scrollbar,
+.small-cards-section::-webkit-scrollbar {
+  display: none; 
 }
 
 /* Footer Menu */
@@ -279,8 +406,8 @@ html, body {
   left: 0;
   bottom: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  /* background-color: rgba(50, 50, 50, 0.8); Semi-transparent background */
+  background: rgba(28, 28, 30, 0.9);
+  /* background-color: rgba(50, 50, 50, 0.95);  */
   border-top: 0.33px solid rgba(0, 0, 0, 0.3);
 }
 
@@ -328,9 +455,9 @@ html, body {
 .plan-card {
     background-color: #323232;
     border-radius: 10px;
-    padding: 8px 20px;
+    padding: 10px 15px;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
   }
@@ -339,6 +466,7 @@ html, body {
 .week-days {
   display: flex;
   justify-content: space-between;
+  gap: 5px;
   margin-bottom: 3px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Very faint line to separate */
   padding-bottom: 8px; /* Add some space below the days */
@@ -346,11 +474,11 @@ html, body {
 }
 
 .week-day {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -363,8 +491,8 @@ html, body {
 }
 
 .week-day.selected {
-  border: 1px solid #a763ff;
-  color: #a763ff;
+  color: #fff;
+  background-color: #a763ff;
 }
 
 /* Dropdown Section */
@@ -372,7 +500,7 @@ html, body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .dropdown-label {
@@ -382,13 +510,13 @@ html, body {
 }
 
 .dropdown {
-  padding: 12px 16px;
+  padding: 12px 8px;
   background-color: #323232;
   border-radius: 10px;
   border: 2px solid #323232;
   color: #fff;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   width: 100%;
 }
@@ -418,7 +546,7 @@ html, body {
 .plan-summary-dropdown .label {
   flex: 1;
   margin-top: 6px;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 500;
   color: #fff;
 }
@@ -431,7 +559,8 @@ html, body {
   border: 2px solid #323232;
   color: #fff;
   cursor: pointer;
-  font-size: 16px;
+  text-align: right;
+  font-size: 14px;
   font-weight: 500;
 }
 
@@ -462,18 +591,20 @@ html, body {
 }
 
 .selected {
+  background-color: #a763ff;
   border: 2px solid #a763ff;
 }
 
-.card-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+.activity-icon {
+  position: absolute;
+  color: #8E8E93;
+  font-size: 14px;
+  top: 15px;
+  left: 10px;
 }
 
 .activity-title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 700;
   color: #fff;
   position: absolute;
@@ -505,6 +636,17 @@ html, body {
   background-color: #a763ff;
 }
 
+.pfp-button {
+  border-radius: 15px;
+  background-color: #a763ff;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  padding: 19px 39px; 
+  width: 100%;
+}
+
 .button {
   border-radius: 15px;
   background-color: #a763ff;
@@ -522,7 +664,7 @@ html, body {
 }
 
 .button:disabled {
-  background-color: #8a4fff;
+  background-color: #323232;
   cursor: not-allowed;
 }
 
@@ -532,13 +674,11 @@ html, body {
 
   /* Back Button */
   .back-btn {
-      position: absolute;  /* Position relative to the nearest positioned ancestor */
-      top: 20px;  /* 20px from the top */
-      left: 20px; /* 20px from the left */
+      text-align: left;
       background-color: transparent;
       font-size: 16px;
-      color: white;
-      /* border: none; */
+      color: #A763FF;
+      border: none;
       cursor: pointer;
     }
 
@@ -617,7 +757,7 @@ html, body {
 .progress-summary {
   width: 100%;
   max-width: 350px;
-  margin: 20px 0;
+  margin: 9px 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -626,20 +766,33 @@ html, body {
 .progress-card {
   background-color: #323232;
   border-radius: 10px;
+  margin-top: 9px;
   padding: 15px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-main {
+  border-radius: 10px;
+  width: 100%;
+}
+
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
 }
 
 .progress-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   color: #fff;
-  margin-bottom: 10px;
 }
 
 .progress-info {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
 }
@@ -658,6 +811,101 @@ html, body {
   border-radius: 5px;
 }
 
+.training-section {
+  display: flex; 
+  width: 100%;
+  justify-content: space-between;
+  gap: 9px; 
+  margin-top: 9px;
+}
+
+.training-card {
+  flex: 0 1 100%;
+  background-color: #323232;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 130px; 
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.training-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px;
+  margin-top: 0px;
+  gap: 15px;
+}
+
+.training {
+  font-size: 26px;
+  color: #a763ff;
+}
+
+.training-text {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.session-section {
+  display: flex; 
+  width: 100%;
+  justify-content: space-between;
+  gap: 9px; 
+  margin-top: 9px;
+  margin-bottom: 45px;
+}
+
+.session-card {
+  flex: 0 1 100%;
+  background-color: #323232;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.session-container {
+  display: flex;
+  align-items: center;  /* Aligns items vertically in the center */
+}
+
+.session-info {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  padding: 9px;
+  margin-top: 0px;
+  gap: 15px;
+  width: 306px;
+}
+
+.running { 
+  color: #a763ff; 
+  font-size: 20px;
+}
+
+.session-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+}
+
+.session {
+  font-size: 16px;
+}
+
+.session-label {
+  font-size: 32px;
+  color: #A763FF;
+}
+
 .progress-details {
   display: flex;
   justify-content: space-between;
@@ -667,6 +915,34 @@ html, body {
 
 .progress-text {
   color: #fff;
+}
+
+.graph-section {
+  display: flex; 
+  width: 100%;
+  justify-content: space-between;
+  gap: 9px; 
+  margin-top: 9px;
+}
+
+.graph-card {
+  flex: 0 1 50%;
+  background-color: #323232;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  height: 180px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.graph-label {
+    font-size: 16px;
+    font-weight: 700;  /* Bold text */
+    margin-top: 9px;
+    margin-left: 10px; /* Add 20px of space to the left */
+    color: #fff; /* Text color (white) */
 }
 
 .community-section {
@@ -743,13 +1019,9 @@ html, body {
   background-color: #a763ff;
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 19px 39px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 16px;
   margin: 5px 0;
-}
-
-.button:hover {
-  background-color: #7a47e5;
 }

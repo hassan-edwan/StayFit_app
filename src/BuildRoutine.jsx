@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import the useNavigate hook
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // For FontAwesome icons
+import {faChildReaching, faPersonRunning, faPersonRays} from '@fortawesome/free-solid-svg-icons'; // Icons
 import './Styles.css';
 
 export default function BuildRoutine() {
@@ -102,11 +104,12 @@ export default function BuildRoutine() {
                 onChange={(e) => setTotalTime(e.target.value)}
                 className="dropdown"
               >
+                <option value="10 min">10 min</option>
+                <option value="25 min">20 min</option>
                 <option value="30 min">30 min</option>
                 <option value="45 min">45 min</option>
-                <option value="1 hour">1 hour</option>
-                <option value="1.5 hours">1.5 hours</option>
-                <option value="2 hours">2 hours</option>
+                <option value="60 min">60 min</option>
+                <option value="90 min">90 min</option>
               </select>
             </div>
 
@@ -118,10 +121,13 @@ export default function BuildRoutine() {
                 onChange={(e) => setPlanLength(e.target.value)}
                 className="dropdown"
               >
+                <option value="2 Weeks">2 Weeks</option>
+                <option value="3 Weeks">3 Weeks</option>
                 <option value="4 Weeks">4 Weeks</option>
+                <option value="5 Weeks">5 Weeks</option>
                 <option value="6 Weeks">6 Weeks</option>
+                <option value="7 Weeks">7 Weeks</option>
                 <option value="8 Weeks">8 Weeks</option>
-                <option value="12 Weeks">12 Weeks</option>
               </select>
             </div>
           </div>
@@ -136,6 +142,7 @@ export default function BuildRoutine() {
               onClick={() => handleActivityToggle('strength')}
             >
               <div className="card-content">
+                <FontAwesomeIcon icon={faPersonRays} className="activity-icon" /> 
                 <span className="activity-title">Strength</span>
               </div>
             </div>
@@ -144,7 +151,8 @@ export default function BuildRoutine() {
               onClick={() => handleActivityToggle('cardio')}
             >
               <div className="card-content">
-                <span className="activity-title">Cardio</span>
+                <FontAwesomeIcon icon={faPersonRunning} className="activity-icon" /> 
+                <span className="activity-title">Treadmill</span>
               </div>
             </div>
             <div
@@ -152,6 +160,7 @@ export default function BuildRoutine() {
               onClick={() => handleActivityToggle('mobility')}
             >
               <div className="card-content">
+                <FontAwesomeIcon icon={faChildReaching} className="activity-icon " /> 
                 <span className="activity-title">Mobility</span>
               </div>
             </div>

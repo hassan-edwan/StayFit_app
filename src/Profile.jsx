@@ -20,16 +20,16 @@ export default function Profile() {
       <div className="profile-card">
         <div className="profile-photo-placeholder"></div>
         <div className="profile-details">
-          <div className="profile-name">John Doe</div>
-          <div className="profile-email">johndoe@example.com</div>
+          <div className="profile-name">Mariam Adwan</div>
+          <div className="profile-email">mariam@edwan.net</div>
         </div>
       </div>
 
       <div className="profile-actions">
-        <button className="button" onClick={() => navigate('/EditProfile')}>
+        <button className="pfp-button" onClick={() => navigate('/EditProfile')}>
           Edit Profile
         </button>
-        <button className="button" onClick={() => navigate('/ChangePassword')}>
+        <button className="pfp-button" onClick={() => navigate('/ChangePassword')}>
           Change Password
         </button>
       </div>
