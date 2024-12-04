@@ -7,9 +7,16 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
-  Todo: a
+  userinfo: a
     .model({
-      content: a.string(),
+      name: a.string(),
+      gym_access: a.string(),
+      conditions: a.string(),
+      fitness_level: a.string(),
+      schedule: a.string(),
+      time_per_day: a.string(),
+      length_of_plan: a.string(),
+      activity_types: a.string()
     })
     .authorization((allow) => [allow.guest()]),
 });
