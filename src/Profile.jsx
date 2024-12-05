@@ -42,7 +42,7 @@ export default function Profile() {
         </div>
       </div>
 
-      <Flex
+      {/* <Flex
       className="App"
       justifyContent="center"
       alignItems="center"
@@ -77,14 +77,16 @@ export default function Profile() {
         ))}
       </Grid>
       <Button onClick={signOut}>Sign Out</Button>
-    </Flex>
+    </Flex> */}
 
       {/* Profile Information */}
       <div className="profile-card">
         <div className="profile-photo-placeholder"></div>
         <div className="profile-details">
-          <div className="profile-name">Mariam Adwan</div>
-          <div className="profile-email">mariam@edwan.net</div>
+          {/* <div className="profile-name">Mariam Adwan</div> */}
+          {userprofiles.map((userprofile) => (
+          <div className="profile-email">{userprofile.email}</div>
+        ))}
         </div>
       </div>
 
@@ -96,6 +98,7 @@ export default function Profile() {
           Change Password
         </button>
       </div>
+      <Button onClick={signOut}>Sign Out</Button>
 
       {/* Footer Menu */}
       <footer className="footer">
