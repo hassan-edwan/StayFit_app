@@ -41,7 +41,7 @@ export default function Profile() {
           Manage your profile and preferences.
         </div>
       </div>
-
+{/* 
       <Flex
       className="App"
       justifyContent="center"
@@ -76,7 +76,7 @@ export default function Profile() {
           </Flex>
         ))}
       </Grid>
-    </Flex>
+    </Flex> */}
 
       {/* Profile Information */}
       <div className="profile-card">
@@ -97,8 +97,10 @@ export default function Profile() {
         <button className="pfp-button" onClick={() => navigate('/ChangePassword')}>
           Change Password
         </button>
+        <button className="pfp-button" onClick={signOut}>
+          Sign Out
+        </button>
       </div>
-      <Button onClick={signOut}>Sign Out</Button>
 
       {/* Footer Menu */}
       <footer className="footer">
