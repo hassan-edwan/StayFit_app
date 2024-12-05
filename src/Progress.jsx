@@ -7,9 +7,9 @@ import './Styles.css';
 
 export default function Progress() {
   const navigate = useNavigate();
-  const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-  const yValues = [55, 49, 44, 24, 15];
-  const barColors = ["red", "green","blue","orange","brown"];
+  // const xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+  // const yValues = [55, 49, 44, 24, 15];
+  // const barColors = ["red", "green","blue","orange","brown"];
 
   // NEEDS TO USE A LAMBDA FUNCTION & GRAPHQL
   // new Chart("myChart", {
@@ -34,7 +34,7 @@ export default function Progress() {
       <div className="large-cards-section">
         <div className="card-row relative">
             <img src={bench} className="card-main" />
-            <div class="bottom-left">
+            <div className="bottom-left">
             <h3 className="card-header0">FOR TODAY</h3>
             <h3 className="card-header">Build and Bench</h3>
             <p className="card-caption small-card-caption">20min - Hip-Hop</p>

@@ -1,4 +1,5 @@
-import { a, defineData, type ClientSchema } from '@aws-amplify/backend';
+import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { postConfirmation } from "../auth/post-confirmation/resource";
 
 /*== STEP 1 ===============================================================
 The section below creates a Todo database table with a "content" field. Try
@@ -6,32 +7,43 @@ adding a new "isDone" field as a boolean. The authorization rule below
 specifies that any unauthenticated user can "create", "read", "update", 
 and "delete" any "Todo" records.
 =========================================================================*/
-
-const schema = a.schema({
-  Todo: a.model({
-      name: a.string(),
-      gym_access: a.string(),
-      conditions: a.string(),
-      fitness_level: a.string(),
-      schedule: a.string(),
-      time_per_day: a.string(),
-      length_of_plan: a.string(),
-      activity_types: a.string()
-    })
-    .authorization(allow => [allow.publicApiKey()])
-});
-
-// Used for code completion / highlighting when making requests from frontend
+const schema = a
+  .schema({
+    UserProfile: a
+      .model({
+        email: a.string(),
+        profileOwner: a.string(),
+      })
+      .authorization((allow) => [
+        allow.ownerDefinedIn("profileOwner"),
+      ]),
+  })
+  .authorization((allow) => [allow.resource(postConfirmation)]);
 export type Schema = ClientSchema<typeof schema>;
 
-// defines the data resource to be deployed
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'apiKey',
-    apiKeyAuthorizationMode: { expiresInDays: 30 }
-  }
+    defaultAuthorizationMode: "apiKey",
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,
+    },
+  },
 });
+
+// const schema = a.schema({
+//   Todo: a.model({
+//       name: a.string(),
+//       gym_access: a.string(),
+//       conditions: a.string(),
+//       fitness_level: a.string(),
+//       schedule: a.string(),
+//       time_per_day: a.string(),
+//       length_of_plan: a.string(),
+//       activity_types: a.string()
+//     })
+//     .authorization(allow => [allow.publicApiKey()])
+// });
 
 /*== STEP 2 ===============================================================
 Go to your frontend source code. From your client-side code, generate a
