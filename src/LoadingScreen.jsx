@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';  // Import useNavigate
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon component
 import { faDumbbell, faSquarePollVertical, faUsers, faUser } from '@fortawesome/free-solid-svg-icons'; // Import specific icons
@@ -7,6 +7,17 @@ import './Styles.css';
 
 export default function LoadingScreen() {
   const navigate = useNavigate(); // Initialize the navigate function
+
+    // Redirect after 3 seconds
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        navigate('/Routines'); // Navigate to the Routines page
+      }, 1000); // 3 seconds
+  
+      // Cleanup the timeout if the component unmounts
+      return () => clearTimeout(timer);
+    }, [navigate]);
+  
 
   const MenuItem = ({ name, icon, isActive, onClick }) => (
     <div className={`menu-item ${isActive ? 'active' : ''}`} onClick={onClick}>
