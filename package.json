@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-amplify/datastore": "^5.0.64",
     "@aws-amplify/ui-react": "^6.7.1",
     "@figma/code-connect": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
