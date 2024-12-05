@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from '@fortawesome/free-solid-svg-icons'; 
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import "./Styles.css";
 
 export default function HealthConcerns() {
@@ -10,6 +10,7 @@ export default function HealthConcerns() {
 
   const navigate = useNavigate();
 
+  // Health conditions list
   const conditions = [
     "Arthritis",
     "Heart Condition",
@@ -23,6 +24,7 @@ export default function HealthConcerns() {
     "Mobility",
   ];
 
+  // Toggle condition selection
   const handleConditionToggle = (condition) => {
     setSelectedConditions((prevState) =>
       prevState.includes(condition)
@@ -31,14 +33,42 @@ export default function HealthConcerns() {
     );
   };
 
-  const handleNextClick = () => {
+  // Handle Next button click
+  const handleNextClick = async () => {
     setLoading(true);
+
     if (selectedConditions.length === 0) {
       alert("Please select at least one health condition.");
       setLoading(false);
       return;
     }
-    navigate("/BuildRoutine");
+
+    // Prepare the updated schema with the selected conditions
+    const updatedSchema = {
+      // Assuming you're combining the schema with the selected conditions
+      ...JSON.parse(localStorage.getItem("userSchema") || "{}"), // If you want to persist user schema
+      healthConditions: selectedConditions, // Add selected conditions to the schema
+    };
+
+    try {
+      // Optional: Save the updated schema to localStorage for persistence across pages
+      localStorage.setItem("userSchema", JSON.stringify(updatedSchema));
+
+      // You can also make an API call here to send the updated schema
+      // Example (if you have an API endpoint):
+      // await axios.post('https://your-api-endpoint.com/update-schema', updatedSchema);
+
+      // Log the updated schema (for debugging)
+      console.log("Updated schema:", updatedSchema);
+
+      // Navigate to the next page
+      navigate("/BuildRoutine");
+    } catch (err) {
+      console.error("Error submitting data:", err);
+      alert("Failed to submit data. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -54,21 +84,17 @@ export default function HealthConcerns() {
             <div key={index} className="condition-item">
               <div
                 className={`checkbox-wrapper ${
-                  selectedConditions.includes(condition)
-                    ? "checkbox-wrapper--selected"
-                    : ""
+                  selectedConditions.includes(condition) ? "checkbox-wrapper--selected" : ""
                 }`}
                 onClick={() => handleConditionToggle(condition)}
               >
                 <div
                   className={`checkbox ${
-                    selectedConditions.includes(condition)
-                      ? "checkbox--selected"
-                      : ""
+                    selectedConditions.includes(condition) ? "checkbox--selected" : ""
                   }`}
                 >
                   {selectedConditions.includes(condition) && (
-                      <FontAwesomeIcon icon={faCheck} className="checkmark" />
+                    <FontAwesomeIcon icon={faCheck} className="checkmark" />
                   )}
                 </div>
                 <span className="text">{condition}</span>

@@ -52,6 +52,22 @@ export default function BuildRoutine() {
       return;
     }
 
+    // Prepare the updated schema with the selected conditions
+    const updatedSchema = {
+      // Assuming you're combining the schema with the selected conditions
+      ...JSON.parse(localStorage.getItem("userSchema") || "{}"), // If you want to persist user schema
+      schedule: selectedDays,
+      time_per_day: totalTime,
+      length_of_plan: planLength,
+      activity_types: selectedActivityTypes, // Add selected conditions to the schema
+    };
+  
+    // Optional: Save the updated schema to localStorage for persistence across pages
+    localStorage.setItem("userSchema", JSON.stringify(updatedSchema));
+
+    // Log the updated schema (for debugging)
+    console.log("Updated schema:", updatedSchema);
+
     setLoading(true);
     // Add further logic for form submission here
     setLoading(false);

@@ -23,7 +23,7 @@ export default function AuthenticatorWrapper({ children }) {
             {user ? (
               <div>
                 {children}
-                <button onClick={signOut}>Sign Out</button>
+                {/* <button onClick={signOut}>Sign Out</button> */}
               </div>
             ) : (
               <p>Loading...</p>

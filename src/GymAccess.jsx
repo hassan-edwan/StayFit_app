@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./Styles.css";
 
 export default function App() {
@@ -11,14 +10,27 @@ export default function App() {
 
   const navigate = useNavigate();
 
+  // Load the saved data from localStorage on component mount
+  useEffect(() => {
+    const savedSchema = localStorage.getItem("userSchema");
+    if (savedSchema) {
+      const parsedSchema = JSON.parse(savedSchema);
+      setName(parsedSchema.name || ""); // Directly access name from root of schema
+      setGymAccess(parsedSchema.gym_access || ""); // Directly access gym_access from root of schema
+    }
+  }, []);
+
+  // Handle gym access selection
   const handleGymAccessChange = (value) => {
     setGymAccess(value);
   };
 
+  // Handle name input change
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
 
+  // Handle form submission
   const handleGetStartedClick = async () => {
     setError("");
 
@@ -29,16 +41,19 @@ export default function App() {
 
     setLoading(true);
 
-    // Prepare the data to send to the backend
-    const payload = {
-      users: name, // Match the column in your DynamoDB table
-      gym_ccess: gymAccess, // Match the column in your DynamoDB table
-    };
-
     try {
-      // Replace this URL with your actual API Gateway endpoint
-      await axios.post("https://jlg4zkc2h0.execute-api.us-east-1.amazonaws.com/production", payload);
-      
+      // Clone the schema and update it with the name and gym_access directly at the root level
+      const updatedSchema = {
+        name: name,  // Directly add name to the schema
+        gym_access: gymAccess,  // Directly add gym_access to the schema
+      };
+
+      // Save the updated schema to localStorage for persistence
+      localStorage.setItem("userSchema", JSON.stringify(updatedSchema));
+
+      // Log or save the updated schema (You could also send this to a backend)
+      console.log("Updated schema:", updatedSchema);
+
       // Navigate to the next page on success
       navigate("/HealthConcerns");
     } catch (err) {
@@ -75,6 +90,7 @@ export default function App() {
           className="input-field"
         />
         {error && <div className="error-message">{error}</div>}
+
         <div className="label">Gym Access</div>
         <div className="yes-no-container">
           <button
